@@ -1,14 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { render } from 'react-dom'
-
 import { StyledEngineProvider } from '@mui/material/styles'
-import { ControlledAccordions } from './demo'
+import { SandBox } from './SandBox'
 
 render(
   <>
     <StyledEngineProvider injectFirst>
-      <ControlledAccordions InnerContents={<h2>Contents</h2>} />
+      <SandBox />
     </StyledEngineProvider>
   </>,
   document.getElementById('root'),
