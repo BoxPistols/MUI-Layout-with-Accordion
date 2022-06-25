@@ -1,47 +1,50 @@
 // https://mui.com/material-ui/react-accordion/
 // https://mui.com/system/flexbox/
 // import React from 'react'
-import * as React from 'react'
-import Accordion from '@mui/material/Accordion'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import Typography from '@mui/material/Typography'
+// import * as React from 'react'
+import React from 'react'
+import { ElementType, ReactNode, VFC } from 'react'
+
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+  Box,
+  SxProps,
+} from '@mui/material'
+
+// import { SxProps } from '@mui/material/styles'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { SxProps } from '@mui/material/styles'
 //
-import Box from '@mui/material/Box'
 
 type setProps = {
-  CmpAccordionTitle: string
-  CmpAccordionSubTitle?: string
-  ExpandedName: string
-  AriaControls: string
-  InlineCss?: SxProps
+  AccordionTitle: string
+  AccordionSubTitle?: string
+  ExpandedName?: string
+  AriaControls?: string
   InitOpen?: string
-  // TODO:
-  CmpAccordionDetails: JSX.Element
+  InlineCss?: SxProps
+  children?: ReactNode
 }
 
-export const CmpAccordion = ({
-  CmpAccordionTitle,
-  CmpAccordionSubTitle,
-  CmpAccordionDetails,
+export const AccordionWrap = ({
+  AccordionTitle,
+  AccordionSubTitle,
+  children,
   ExpandedName,
   AriaControls,
   InlineCss,
   InitOpen,
-  ...props
 }: setProps) => {
   const [expanded, setExpanded] = React.useState<string | boolean>(
     `${InitOpen}`,
   )
 
-  const handleChange = (panel: string) => (
-    _event: React.SyntheticEvent,
-    isExpanded: boolean,
-  ) => {
-    setExpanded(isExpanded ? panel : false)
-  }
+  const handleChange =
+    (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false)
+    }
 
   return (
     <>
@@ -54,8 +57,6 @@ export const CmpAccordion = ({
           expandIcon={<ExpandMoreIcon />}
           aria-controls={AriaControls}
           id={AriaControls}
-          // aria-controls="panel1bh-content"
-          // id="panel1bh-header"
           sx={{
             minHeight: '3em',
             '&:hover': {
@@ -74,19 +75,13 @@ export const CmpAccordion = ({
               pr: 3,
             }}
           >
-            {/* <Typography sx={{ width: 'fit-content', mr: 1 }}> */}
-            <Typography sx={{ display: 'block' }}>
-              {CmpAccordionTitle}
-            </Typography>
+            <Typography sx={{ display: 'block' }}>{AccordionTitle}</Typography>
             <Typography sx={{ display: 'block', color: 'text.secondary' }}>
-              {CmpAccordionSubTitle}
+              {AccordionSubTitle}
             </Typography>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
-          {/* <Typography>{CmpAccordionDetails}</Typography> */}
-          {CmpAccordionDetails}
-        </AccordionDetails>
+        <AccordionDetails>{children}</AccordionDetails>
       </Accordion>{' '}
     </>
   )
