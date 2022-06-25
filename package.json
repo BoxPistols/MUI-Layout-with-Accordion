@@ -12,6 +12,7 @@
   },
   "description": "https://github.com/mui/material-ui/blob/v5.8.1/docs/data/material/components/accordion/ControlledAccordions.tsx",
   "devDependencies": {
+    "prettier": "^2.7.1",
     "react-scripts": "latest"
   },
   "main": "index.tsx",
@@ -23,5 +24,17 @@
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "version": "0.0.181"
+  "version": "0.0.181",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

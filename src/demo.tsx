@@ -6,7 +6,7 @@ type setProps = {
   InnerContents: JSX.Element
 }
 
-export const ControlledAccordions = ({ InnerContents }: setProps) => {
+export function ControlledAccordions({ InnerContents }: setProps): JSX.Element {
   return (
     <>
       <CmpAccordion
@@ -16,23 +16,20 @@ export const ControlledAccordions = ({ InnerContents }: setProps) => {
         CmpAccordionTitle="アコーディオンのタイトル"
         CmpAccordionSubTitle="サブタイトル"
         CmpAccordionDetails={InnerContents}
-        InlineCss={{ mb: 1 }}
-      />
+        InlineCss={{ mb: 1 }} />
 
       <CmpAccordion
         ExpandedName="panel2"
         AriaControls="panel2-content"
         CmpAccordionTitle="特別な項目設定2"
-        CmpAccordionDetails={<h1>Develop</h1>}
-      />
+        CmpAccordionDetails={<h1>Develop</h1>} />
 
       <CmpAccordion
         InitOpen="panel3"
         ExpandedName="panel3"
         AriaControls="panel3-content"
         CmpAccordionTitle="特別な項目設定3"
-        CmpAccordionDetails={<h1>Develop</h1>}
-      />
+        CmpAccordionDetails={<h1>Develop</h1>} />
     </>
   )
 }

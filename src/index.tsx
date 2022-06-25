@@ -1,12 +1,15 @@
-import * as React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+
 import { StyledEngineProvider } from '@mui/material/styles'
 import { ControlledAccordions } from './demo'
 
-ReactDOM.createRoot(document.querySelector('#root')).render(
-  <React.StrictMode>
+render(
+  <>
     <StyledEngineProvider injectFirst>
       <ControlledAccordions InnerContents={<h2>Contents</h2>} />
     </StyledEngineProvider>
-  </React.StrictMode>,
+  </>,
+  document.getElementById('root'),
 )
