@@ -1,7 +1,4 @@
 // https://mui.com/material-ui/react-accordion/
-// https://mui.com/system/flexbox/
-// import React from 'react'
-// import * as React from 'react'
 import React from 'react'
 import { ElementType, ReactNode, VFC } from 'react'
 
@@ -9,33 +6,76 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  AccordionSummaryProps,
+  AccordionProps,
   Typography,
   Box,
   SxProps,
+  styled,
 } from '@mui/material'
-
-// import { SxProps } from '@mui/material/styles'
+// Icon
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-//
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 
 type setProps = {
   AccordionTitle: string
   AccordionSubTitle?: string
   ExpandedName?: string
-  AriaControls?: string
+  id?: string
   InitOpen?: string
   InlineCss?: SxProps
   children?: ReactNode
+  additionalProps?: JSX.Element
 }
+
+// Stylings
+const AccordionStyle = styled((props: AccordionProps) => (
+  <Accordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  borderRadius: 10,
+  mb: 4,
+  // '&:not(:last-child)': {
+  //   borderBottom: 0,
+  // },
+  '&:before': {
+    display: 'none',
+  },
+}))
+
+const AccordionSummaryStyle = styled((props: AccordionSummaryProps) => (
+  <AccordionSummary {...props} />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .015)',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, .03)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+    borderRadius: '10px, 10px , 0 , 0',
+  },
+}))
+
+const AccordionDetailsStyle = styled(AccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+  borderRadius: '0, 0,10px,10px',
+  // borderBottom: '1px solid rgba(0, 0, 0, .125)',
+}))
 
 export const AccordionWrap = ({
   AccordionTitle,
   AccordionSubTitle,
   children,
   ExpandedName,
-  AriaControls,
+  id,
   InlineCss,
   InitOpen,
+  additionalProps,
+  ...props
 }: setProps) => {
   const [expanded, setExpanded] = React.useState<string | boolean>(
     `${InitOpen}`,
@@ -48,41 +88,51 @@ export const AccordionWrap = ({
 
   return (
     <>
-      <Accordion
+      <AccordionStyle
         expanded={expanded === `${ExpandedName}`}
         onChange={handleChange(`${ExpandedName}`)}
         sx={InlineCss}
+        style={{ marginBottom: 40 }}
       >
-        <AccordionSummary
+        <AccordionSummaryStyle
           expandIcon={<ExpandMoreIcon />}
-          aria-controls={AriaControls}
-          id={AriaControls}
-          sx={{
-            minHeight: '3em',
-            '&:hover': {
-              backgroundColor: '#cccccc99',
-            },
-          }}
-          style={{ marginBottom: 24 }}
+          aria-controls={id}
+          id={id}
+          // style={{ marginBottom: 24 }}
         >
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
               flexWrap: 'wrap',
               width: '100%',
-              height: '2em',
-              pr: 3,
+              pr: 5,
             }}
           >
-            <Typography sx={{ display: 'block' }}>{AccordionTitle}</Typography>
-            <Typography sx={{ display: 'block', color: 'text.secondary' }}>
-              {AccordionSubTitle}
-            </Typography>
+            <Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-center',
+                }}
+              >
+                <Typography>{AccordionTitle}</Typography>
+                <Typography>
+                  <HelpOutlineIcon fontSize="small" />
+                </Typography>
+              </Box>
+
+              <Typography sx={{ display: 'block', color: 'text.secondary' }}>
+                {AccordionSubTitle}
+              </Typography>
+            </Box>
+            <Box>{additionalProps}</Box>
           </Box>
-        </AccordionSummary>
-        <AccordionDetails>{children}</AccordionDetails>
-      </Accordion>{' '}
+        </AccordionSummaryStyle>
+        <AccordionDetailsStyle>{children}</AccordionDetailsStyle>
+      </AccordionStyle>
     </>
   )
 }
