@@ -10,6 +10,7 @@ import {
   AccordionProps,
   Typography,
   Box,
+  Tooltip,
   SxProps,
   styled,
 } from '@mui/material'
@@ -26,6 +27,14 @@ type setProps = {
   InlineCss?: SxProps
   children?: ReactNode
   additionalProps?: JSX.Element
+  TooltipPropsTiitle?: ReactNode
+  // TooltipPropsTiitle?:
+  //   | string
+  //   | number
+  //   | boolean
+  //   | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  //   | React.ReactFragment
+  //   | React.ReactPortal
 }
 
 // Stylings
@@ -75,6 +84,7 @@ export const AccordionWrap = ({
   InlineCss,
   InitOpen,
   additionalProps,
+  TooltipPropsTiitle,
   ...props
 }: setProps) => {
   const [expanded, setExpanded] = React.useState<string | boolean>(
@@ -119,9 +129,25 @@ export const AccordionWrap = ({
                 }}
               >
                 <Typography>{AccordionTitle}</Typography>
-                <Typography>
-                  <HelpOutlineIcon fontSize="small" />
-                </Typography>
+                {TooltipPropsTiitle && (
+                  <Typography>
+                    <Tooltip // 別コンポーネント
+                      title={TooltipPropsTiitle}
+                      placement="top-start"
+                      arrow
+                      sx={
+                        {
+                          // TODO: Styling FontSize, Position
+                          // .MuiTooltip-tooltip
+                          // .MuiTooltip-tooltipArrow
+                          // .MuiTooltip-tooltipPIacementTop
+                        }
+                      }
+                    >
+                      <HelpOutlineIcon fontSize="small" />
+                    </Tooltip>
+                  </Typography>
+                )}
               </Box>
 
               <Typography sx={{ display: 'block', color: 'text.secondary' }}>

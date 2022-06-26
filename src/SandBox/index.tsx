@@ -16,6 +16,8 @@ export function SandBox(): JSX.Element {
             AccordionSubTitle="サブタイトル"
             // InlineCss={{ mb: 1 }}
             additionalProps={<Box>additionalProps</Box>}
+            TooltipPropsTiitle="TooltipPropsTiitle 説明文を
+            表示するためのプロパティ"
           >
             <Box>コンテンツ</Box>
             <Box>コンテンツ</Box>
