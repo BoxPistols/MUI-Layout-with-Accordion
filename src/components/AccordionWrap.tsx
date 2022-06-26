@@ -43,7 +43,8 @@ const AccordionStyle = styled((props: AccordionProps) => (
 ))(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: 10,
-  mb: 4,
+  marginBottom: 40,
+  transition: '0ms',
   // '&:not(:last-child)': {
   //   borderBottom: 0,
   // },
@@ -55,23 +56,28 @@ const AccordionStyle = styled((props: AccordionProps) => (
 const AccordionSummaryStyle = styled((props: AccordionSummaryProps) => (
   <AccordionSummary {...props} />
 ))(({ theme }) => ({
+  borderRadius: 10,
+  // TODO: DarkMode Color設定
   backgroundColor:
     theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
-      : 'rgba(0, 0, 0, .015)',
+      ? 'rgba(255, 255, 255, .02)'
+      : 'rgba(0, 0, 0, .02)',
+  '&.Mui-expanded': {
+    borderRadius: '9px 9px 0 0',
+  },
+  transition: '.3s',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
+    backgroundColor: 'rgba(0, 0, 0, .04)',
   },
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1),
-    borderRadius: '10px, 10px , 0 , 0',
   },
 }))
 
 const AccordionDetailsStyle = styled(AccordionDetails)(({ theme }) => ({
   padding: theme.spacing(3),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
-  borderRadius: '0, 0,10px,10px',
+  borderRadius: '0 0 10px 10px',
   // borderBottom: '1px solid rgba(0, 0, 0, .125)',
 }))
 
@@ -102,7 +108,7 @@ export const AccordionWrap = ({
         expanded={expanded === `${ExpandedName}`}
         onChange={handleChange(`${ExpandedName}`)}
         sx={InlineCss}
-        style={{ marginBottom: 40 }}
+        // style={{ marginBottom: 40 }}
       >
         <AccordionSummaryStyle
           expandIcon={<ExpandMoreIcon />}
